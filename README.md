@@ -110,32 +110,6 @@ class MyProvider extends ChangeNotifier {
 }
 ```
 
-### Using a Provider in a Stateful Widget
-
-To use a provider in a stateful widget, you must first create an instance of the provider in the `initState()` method.
-
-```dart
-class MyWidget extends StatefulWidget {
-  @override
-  _MyWidgetState createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> {
-  MyProvider myProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    myProvider = Provider.of<MyProvider>(context, listen: true);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(myProvider.someValue);
-  }
-}
-```
-
 ## Task: Create a Todo List App
 
 This week you will be creating a simple todo list app. The app must use the provider library to manage state.
