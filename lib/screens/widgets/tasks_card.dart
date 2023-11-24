@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_list/models/task_model.dart';
-import 'package:todo_list/providers/tasks_provider.dart';
 
 class TasksCard extends StatelessWidget {
   final Tasks givenTask;
-  const TasksCard({super.key, required this.givenTask});
+  final void Function()? onPressed;
+  final void Function()? checkBoxOnPressed;
+
+  const TasksCard({
+    super.key,
+    required this.givenTask,
+    required this.onPressed,
+    required this.checkBoxOnPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +30,11 @@ class TasksCard extends StatelessWidget {
                 blurStyle: BlurStyle.outer),
           ]),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        const Icon(Icons.check_box_outline_blank),
+        IconButton(
+            icon: givenTask.isDone
+                ? const Icon(Icons.check)
+                : const Icon(Icons.check_box_outline_blank),
+            onPressed: checkBoxOnPressed),
         Text(
           givenTask.title,
           style: GoogleFonts.abel(
@@ -43,27 +53,7 @@ class TasksCard extends StatelessWidget {
             color: Colors.pink,
             iconSize: 20,
             icon: const Icon(Icons.delete),
-            onPressed: () => Provider.of<TasksProvider>(context, listen: false)
-                .removeTask(index),
-          ),
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.all(10),
-          decoration: const BoxDecoration(
-              color: Colors.purple,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                    offset: Offset(1, 1),
-                    blurRadius: 12,
-                    blurStyle: BlurStyle.outer),
-              ]),
-          child: IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {},
+            onPressed: onPressed,
           ),
         ),
       ]),

@@ -25,23 +25,21 @@ class TasksProvider extends ChangeNotifier {
         title: 'Fifth Task', description: 'Complete the Tasks', isDone: false),
   ];
 
-  get _allTasks => allTasks;
+  List<Tasks> get _allTasks => allTasks;
 
-  get title => title;
-
-  get description => description;
-
-  void createTask(int index) {
-    _allTasks.createTask(title, description);
+  void createTask(String title, String description, bool isDone) {
+    Tasks addTask =
+        Tasks(title: title, description: description, isDone: false);
+    allTasks.add(addTask);
     notifyListeners();
   }
 
   void removeTask(int index) {
-    _allTasks.remove(_allTasks[index]);
+    _allTasks.removeAt(index);
     notifyListeners();
   }
 
-  void handleToDoChange(Tasks allTasks) {
-    _allTasks.isDone = !allTasks.isDone;
+  void handleToDoChange(int index) {
+    _allTasks[index].isDone = !_allTasks[index].isDone;
   }
 }

@@ -6,15 +6,19 @@ import 'package:todo_list/screens/widgets/header.dart';
 import 'package:todo_list/screens/widgets/tasks_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({
-    super.key,
-  });
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String get title => title;
+
+  String get description => description;
+
+  bool get isDone => false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,14 +64,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: TasksCard(
                               givenTask: providerInfo.allTasks[index],
+                              onPressed: () => providerInfo.removeTask(index),
+                              checkBoxOnPressed: () =>
+                                  providerInfo.handleToDoChange(index),
                             ),
                           );
                         }),
                   );
                 },
               ),
-              const AddButton(),
-              const SizedBox(height: 10)
+              Consumer<TasksProvider>(builder: (context, providerInfo, child) {
+                return AddButton(
+                    addTaskOnPressed: () =>
+                        providerInfo.createTask(title, description, isDone));
+              }),
+              const SizedBox(height: 10),
             ],
           ),
         ));

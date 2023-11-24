@@ -4,25 +4,9 @@ class Tasks {
   String description;
   bool isDone;
 
-  void set Id(int id) {
-    this.index = index;
-  }
+  get _title => title;
 
-  int get Id {
-    return index;
-  }
-
-  void set Title(String title) {
-    this.title = title;
-  }
-
-  void set Description(String description) {
-    this.description = description;
-  }
-
-  String get Description {
-    return description;
-  }
+  get _description => description;
 
   Tasks(
       {this.index = 1,
