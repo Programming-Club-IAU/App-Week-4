@@ -5,17 +5,21 @@ import 'package:todo_list/screens/widgets/add_button.dart';
 import 'package:todo_list/screens/widgets/header.dart';
 import 'package:todo_list/screens/widgets/tasks_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
   });
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          elevation: 2,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -50,13 +54,12 @@ class HomeScreen extends StatelessWidget {
                     child: ListView.builder(
                         padding: const EdgeInsets.only(top: 80),
                         scrollDirection: Axis.vertical,
-                        itemCount: providerInfo.tasks.length,
+                        itemCount: providerInfo.allTasks.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: TasksCard(
-                              title: providerInfo.tasks[index].title,
-                              isDone: null!,
+                              givenTask: providerInfo.allTasks[index],
                             ),
                           );
                         }),
@@ -64,6 +67,7 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               const AddButton(),
+              const SizedBox(height: 10)
             ],
           ),
         ));

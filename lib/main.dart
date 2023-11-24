@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => TasksProvider()),
+    ChangeNotifierProvider(create: (context) => TasksProvider()),
   ], child: const MyApp()));
 }
 
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Task List',
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
