@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:todo_list/models/task_model.dart';
 
@@ -31,6 +33,8 @@ class TasksProvider extends ChangeNotifier {
     Tasks addTask =
         Tasks(title: title, description: description, isDone: false);
     allTasks.add(addTask);
+    Navigator.of(context as BuildContext).pop();
+
     notifyListeners();
   }
 
@@ -41,5 +45,6 @@ class TasksProvider extends ChangeNotifier {
 
   void handleToDoChange(int index) {
     _allTasks[index].isDone = !_allTasks[index].isDone;
+    notifyListeners();
   }
 }

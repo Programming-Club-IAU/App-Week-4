@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_list/models/task_model.dart';
+import 'package:todo_list/providers/tasks_provider.dart';
+
+void runFilter(String enteredKeyWord) {
+  List<Tasks> results = [];
+  if (enteredKeyWord.isEmpty) {
+    results = allTasks;
+  } else {
+    results = allTasks.where((item) => item.allTasks!
+        .toLowerCase()
+        .contains(enteredKeyWord.toLowerCase(()))
+        .toList());
+  }
+  setState(() {
+    findTask = results;
+  });
+}
 
 // ignore: must_be_immutable
 class Header extends StatelessWidget {
@@ -38,6 +55,7 @@ class Header extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(20)),
         child: const TextField(
+          onChanged: (value) => runFilter(enteredKeyWord),
           decoration: InputDecoration(
               contentPadding: EdgeInsets.all(0),
               prefixIcon: Icon(Icons.search, color: Colors.black87, size: 20),
