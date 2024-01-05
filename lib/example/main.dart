@@ -17,11 +17,38 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
+  ThemeData _themeData() {
+    return ThemeData(
+      primarySwatch: Colors.blue,
+      appBarTheme: const AppBarTheme(
+        color: Colors.blue,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
+          textStyle: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      theme: _themeData(),
+      home: const Scaffold(
         body: ShopScreen(),
       ),
     );
